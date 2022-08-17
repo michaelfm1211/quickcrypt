@@ -1,11 +1,12 @@
 PREFIX = /usr/local
 
 SRCS := $(wildcard *.c)
-OBJS := $(SRCS: .c=.o)
+OBJS := $(SRCS:.c=.o)
 
 CFLAGS += -Wall -Wextra -std=c99
 LDFLAGS += -lsodium
 
+all: CFLAGS += -c
 all: qc
 
 %.o: %.c
