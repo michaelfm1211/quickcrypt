@@ -27,5 +27,5 @@ install: qc
 
 .PHONY: clean
 clean:
-	rm -rf $(OBJS) qc
+	rm -rf $(OBJS) qc debug
 
