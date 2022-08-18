@@ -58,6 +58,7 @@ void read_key() {
 
     fread(key, crypto_secretstream_xchacha20poly1305_KEYBYTES, 1, keyfile);
     key_exists = true;
+    fclose(keyfile);
 }
 
 void gen() {
@@ -68,14 +69,15 @@ void gen() {
     else if (access(key_path, F_OK) == 0)
         panic(ERR_KEY_EXISTS, key_path);
 
-    FILE *key_file = fopen(key_path, "w");
-    if (key_file == NULL)
+    FILE *keyfile = fopen(key_path, "w");
+    if (keyfile == NULL)
         panic(key_path);
 
     crypto_secretstream_xchacha20poly1305_keygen(key);
     
-    fwrite(key, crypto_secretstream_xchacha20poly1305_KEYBYTES, 1, key_file);
+    fwrite(key, crypto_secretstream_xchacha20poly1305_KEYBYTES, 1, keyfile);
     key_exists = true;
+    fclose(keyfile);
 }
 
 void salt(const char *str) {
